@@ -11,8 +11,11 @@ VENV_DIR="${WORKSPACE_DIR}/venv"
 
 echo "=== 1. Compilando la librería de C++ (lib_3d_mec_ginac) ==="
 cd "${CPP_DIR}"
+mkdir -p build && cd build
+cmake -DCMAKE_INSTALL_PREFIX="${WORKSPACE_DIR}" ..
 make
 make install
+
 
 echo "=== 2. Copiando el archivo .so generado ==="
 SO_FILE="${WORKSPACE_DIR}/lib/lib_3d_mec_ginac.so.2.0.0"
@@ -33,6 +36,8 @@ echo "=== 3.5. Asegurando cabeceras del sistema actualizadas ==="
 rm -rf "${PYTHON_DIR}/include/ginac" "${PYTHON_DIR}/include/cln"
 cp -r /usr/include/ginac "${PYTHON_DIR}/include/ginac"
 cp -r /usr/include/cln "${PYTHON_DIR}/include/cln"
+cp -r "${WORKSPACE_DIR}/include/lib_3d_mec_ginac"/* "${PYTHON_DIR}/include/"
+
 
 echo "=== 4. Reinstalando la librería de Python en el entorno virtual ==="
 cd "${WORKSPACE_DIR}"
