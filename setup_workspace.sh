@@ -141,10 +141,12 @@ ln -sf lib_3d_mec_ginac.so "${PY_LIB_DIR}/lib_3d_mec_ginac.so.2"
 cp -L /usr/lib/x86_64-linux-gnu/libcln.so "${PY_LIB_DIR}/libcln.so"
 cp -L /usr/lib/x86_64-linux-gnu/libginac.so "${PY_LIB_DIR}/libginac.so"
 
-# Replace old bundled headers with system headers to avoid ABI mismatch
+# Replace old bundled headers with system headers and newly built C++ headers to avoid ABI mismatch
 rm -rf "${PYTHON_DIR}/include/ginac" "${PYTHON_DIR}/include/cln"
 cp -r /usr/include/ginac "${PYTHON_DIR}/include/ginac"
 cp -r /usr/include/cln "${PYTHON_DIR}/include/cln"
+cp -r "${WORKSPACE_DIR}/include/lib_3d_mec_ginac"/* "${PYTHON_DIR}/include/"
+
 echo "Shared libraries and headers synchronized."
 echo ""
 
