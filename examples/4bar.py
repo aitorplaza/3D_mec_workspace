@@ -186,7 +186,7 @@ delta_q = subs(delta_q, ddq_aux, 0)
 
 print("--> [8/8] Exporting numerical functions for MATLAB and Python...")
 # MATLAB export
-export_numeric_init_func_MATLAB()
+export_environment_MATLAB()
 export_numeric_func_MATLAB(Phi, 'Phi_', 'Phi_out')
 export_numeric_func_MATLAB(Phi_q, 'Phi_q_', 'Phi_q_out')
 export_numeric_func_MATLAB(dPhi_dq, 'dPhi_dq_', 'dPhi_dq_out')
