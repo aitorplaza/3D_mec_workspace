@@ -14,7 +14,7 @@ This repository contains the helper scripts and examples needed to easily compil
 To set up the workspace, simply run the master installer script:
 
 ```bash
-curl https://raw.githubusercontent.com/aitorplaza/3D_mec_workspace/main/setup_workspace.sh | bash
+./setup_workspace.sh
 ```
 
 During execution, the script will ask for the path/name of your workspace directory.
