@@ -60,7 +60,8 @@ cd 3D_mec_workspace
 
 2. **Run an example simulation**:
    ```bash
-   python examples/4bar.py
+   cd examples
+   python 4bar.py
    ```
 
 ---
