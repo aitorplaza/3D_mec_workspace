@@ -32,32 +32,58 @@ echo ""
 # --------------------------------------------------------
 # Step 1: Pre-installation checks (System Dependencies)
 # --------------------------------------------------------
-echo "--> Step 1: Verifying system compiler and pkg-config dependencies..."
+# Check individual system/pkg-config dependencies
+MISSING_PKGS=()
 
 if ! command -v g++ &> /dev/null; then
-    echo "ERROR: g++ compiler is not installed! Please run:"
-    echo "    sudo apt install build-essential"
-    exit 1
+    MISSING_PKGS+=("build-essential")
 fi
 
 if ! command -v pkg-config &> /dev/null; then
-    echo "ERROR: pkg-config is not installed! Please run:"
-    echo "    sudo apt install pkg-config"
-    exit 1
+    MISSING_PKGS+=("pkg-config")
 fi
 
 if ! command -v cmake &> /dev/null; then
-    echo "ERROR: cmake is not installed! Please run:"
-    echo "    sudo apt install cmake"
-    exit 1
+    MISSING_PKGS+=("cmake")
 fi
 
-echo "--> Verifying mathematical C++ dependencies (GiNaC & CLN)..."
-if ! pkg-config --exists ginac cln gsl blas lapack; then
-    echo "ERROR: One or more math dependencies are missing!"
-    echo "Please install them by running:"
-    echo "    sudo apt install libgsl-dev libblas-dev liblapack-dev libcln-dev libginac-dev"
-    exit 1
+if ! pkg-config --exists gsl; then
+    MISSING_PKGS+=("libgsl-dev")
+fi
+
+if ! pkg-config --exists blas; then
+    MISSING_PKGS+=("libblas-dev")
+fi
+
+if ! pkg-config --exists lapack; then
+    MISSING_PKGS+=("liblapack-dev")
+fi
+
+if ! pkg-config --exists cln; then
+    MISSING_PKGS+=("libcln-dev")
+fi
+
+if ! pkg-config --exists ginac; then
+    MISSING_PKGS+=("libginac-dev")
+fi
+
+if [ ${#MISSING_PKGS[@]} -ne 0 ]; then
+    echo "WARNING: The following required system packages are missing:"
+    for pkg in "${MISSING_PKGS[@]}"; do
+        echo "  - ${pkg}"
+    done
+    echo ""
+    read -p "Would you like to install the missing packages now using sudo apt? [Y/n] " INSTALL_CHOICE
+    INSTALL_CHOICE=${INSTALL_CHOICE:-Y}
+    if [[ "${INSTALL_CHOICE}" =~ ^[Yy]$ ]]; then
+        echo "Running: sudo apt update && sudo apt install -y ${MISSING_PKGS[*]}"
+        sudo apt update && sudo apt install -y "${MISSING_PKGS[@]}"
+    else
+        echo "ERROR: Missing required packages: ${MISSING_PKGS[*]}"
+        echo "Please install them manually using:"
+        echo "    sudo apt install -y ${MISSING_PKGS[*]}"
+        exit 1
+    fi
 fi
 
 echo "System dependencies verified successfully!"

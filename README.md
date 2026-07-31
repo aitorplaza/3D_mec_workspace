@@ -42,7 +42,7 @@ cd 3D_mec_workspace
 ```
 
 ### What `setup_workspace.sh` does automatically:
-1. Verifies system dependencies (`cmake`, `g++`, `GiNaC`, `CLN`, `GSL`, etc.).
+1. Verifies system dependencies (`cmake`, `g++`, `libgsl-dev`, `GiNaC`, `CLN`, etc.) and offers to install missing ones via `apt`.
 2. Clones `lib_3d_mec_ginac` and `pylib3d-mec-ginac` if they are not already present.
 3. Compiles and installs the C++ core library locally.
 4. Sets up a Python virtual environment (`venv`) with all required Python dependencies.
