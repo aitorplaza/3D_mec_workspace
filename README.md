@@ -6,8 +6,8 @@ This repository provides a unified workspace for configuring, building, and runn
 
 ## 🏛️ Architecture Overview
 
-* **`lib_3d_mec_ginac`**: Core library written in C++ that performs symbolic kinematics and dynamics calculations using **GiNaC** and **CLN**.
-* **`pylib3d-mec-ginac`**: Python package wrapping the C++ core via Cython, enabling Python scripts to run 3D mechanism simulations seamlessly.
+* **[lib_3d_mec_ginac](https://github.com/aitorplaza/lib_3d_mec_ginac)**: Core library written in C++ that performs symbolic kinematics and dynamics calculations using **GiNaC** and **CLN**.
+* **[pylib3d-mec-ginac](https://github.com/aitorplaza/pylib3d-mec-ginac)**: Python package wrapping the C++ core via Cython, enabling Python scripts to run 3D mechanism simulations seamlessly.
 
 ---
 
