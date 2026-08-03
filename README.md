@@ -25,6 +25,7 @@ sudo apt update && sudo apt install -y \
     liblapack-dev \
     libcln-dev \
     libginac-dev \
+    libgl1-mesa-dev \
     python3-venv \
     python3-dev
 ```
